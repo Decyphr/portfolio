@@ -1,22 +1,26 @@
 import React from "react";
-import { Link, graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
+import ProjectBanner from "../components/Home/ProjectBanner";
+import Hero from "../components/Home/Hero";
+import { Button } from '../components/style/buttons';
+import { FlexBox } from "../components/style/containers";
+
 
 const IndexPage = ({ data }) => {
-  const projects = data.allContentfulProject.edges;
 
   return (
     <Layout>
       <SEO title="Portfolio" />
-      <h1>Hi people</h1>
-      <p>Welcome to your new Gatsby site. 🔥  </p>
-      <p>Now go build something great.</p>
-      {projects.map(project => (
-        <img src={project.node.image.file.url} alt={project.node.title} />
-      ))}
-      <Link to="/page-2/">Go to page 2</Link>
+      <Hero />
+      <ProjectBanner projects={data.allContentfulProject.edges} />
+      <FlexBox justify="center" margin="100px auto">
+        <Link to="/projects">
+          <Button>See More</Button>
+        </Link>
+      </FlexBox>
     </Layout>
   );
 };

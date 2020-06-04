@@ -11,8 +11,21 @@ import { useStaticQuery, graphql } from "gatsby";
 import { ThemeProvider } from 'styled-components';
 
 import Header from "./header";
+import Footer from "./footer";
 import "./layout.css";
 import { theme } from "./style/theme";
+import { motion } from "framer-motion";
+
+const variants = {
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1.25,
+    }
+  },
+  hidden: { opacity: 0, y: 25 }
+};
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -28,20 +41,12 @@ const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
+      <main style={{ paddingTop: 125, minHeight: 'calc(100vh - 85px)' }}>
+        <motion.div initial="hidden" animate="visible" variants={variants}>
+          {children}
+        </motion.div>
+      </main>
+      <Footer />
     </ThemeProvider>
   );
 };

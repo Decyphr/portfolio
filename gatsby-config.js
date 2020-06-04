@@ -4,7 +4,7 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    title: `Blake Hartman.`,
+    title: `Blake Hartman`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `Blake Hartman`,
   },
@@ -46,3 +46,5 @@ module.exports = {
     // `gatsby-plugin-offline`,
   ],
 };
+
+
